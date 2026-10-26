@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TextBridge Live</title>
+<style>
+
+:root{color-scheme:dark;--bg:#050b12;--panel:#0b1720;--line:#174453;--text:#e6fcff;--muted:#82aab5;--accent:#00e5ff;--green:#9dff6e;--glow:#00e5ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#103847 0%,#07111a 44%,var(--bg) 78%);color:var(--text);font:15px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;padding:22px 14px;min-height:100vh}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background:linear-gradient(transparent 95%,#00e5ff 96%);background-size:100% 5px;z-index:0}main{max-width:1000px;margin:auto;position:relative;z-index:1}header{text-align:center;margin:8px 0 22px}header>div:first-child{display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border:1px solid var(--accent);color:var(--accent);font-size:30px;border-radius:16px;box-shadow:0 0 24px #00e5ff25,inset 0 0 18px #00e5ff12}h1{font-size:clamp(28px,5vw,38px);margin:10px 0 4px;letter-spacing:2px;text-transform:uppercase;text-shadow:0 0 18px #00e5ff45}header p,.hint{color:var(--muted)}.connect{display:flex;gap:9px;align-items:center;flex-wrap:wrap;background:linear-gradient(120deg,#0b1c27,#09141d);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:4px;padding:13px;margin-bottom:16px;box-shadow:0 8px 30px #0003}.connect label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}input{background:#040c12;border:1px solid #205263;border-radius:3px;padding:11px;color:var(--text);font-size:14px;min-width:0}#room{width:190px}button{border:1px solid var(--accent);border-radius:3px;padding:12px 15px;background:var(--accent);color:#031117;font-weight:900;font-size:12px;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px));transition:filter .15s,transform .15s}button:hover{filter:brightness(1.12);transform:translateY(-1px)}button.secondary{background:#0c202b;color:#c4f7ff;border:1px solid #245262}button.green{background:var(--green);border-color:var(--green);color:#0a1605}button:disabled{opacity:.4;cursor:not-allowed;transform:none}.status{font-size:12px;color:var(--muted);flex:1;min-width:150px}.dot{display:inline-block;width:8px;height:8px;background:#e9b65b;border-radius:50%;margin-right:6px;box-shadow:0 0 10px currentColor}.dot.ok{background:var(--green)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:linear-gradient(145deg,rgba(11,25,35,.98),rgba(6,16,24,.98));border:1px solid var(--line);border-radius:5px;padding:19px;min-width:0;box-shadow:0 12px 35px #0002;position:relative}.card:before{content:"";position:absolute;top:-1px;left:16px;width:68px;height:2px;background:var(--accent);box-shadow:0 0 12px #00e5ff88}.head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}.head h2{font-size:16px;margin:0;letter-spacing:.04em}.tag{font-size:10px;font-weight:900;letter-spacing:.12em;border:1px solid #276074;background:#0d2632;color:#83edff;padding:5px 9px;border-radius:2px}textarea,.preview{width:100%;min-height:180px;resize:vertical;background:#030b11;border:1px solid #1a4857;border-radius:3px;padding:13px;color:var(--text);font:14px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}textarea:focus{outline:1px solid var(--accent);box-shadow:0 0 0 3px #00e5ff15}.preview{white-space:pre-wrap;overflow:auto;max-height:260px}.empty{color:#52727c}.actions{display:flex;gap:9px;margin-top:12px;flex-wrap:wrap}.actions button{flex:1}.send{width:100%;margin-top:10px}.copy{background:var(--green);border-color:var(--green);width:100%;font-size:13px;margin-top:12px}.hint{font-size:12px;margin:10px 0 0}.message{font-size:12px;min-height:20px;color:var(--green);margin-top:8px}.history{margin-top:16px}.history-list{display:grid;gap:10px}.history-item{border:1px solid #194351;border-left:2px solid #347b8c;background:#07141d;border-radius:3px;padding:12px}.history-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}.history-time{font-size:11px;color:var(--muted)}.history-text{white-space:pre-wrap;overflow-wrap:anywhere;color:#d5f8ff;font:12px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;max-height:75px;overflow:hidden}.history-actions{display:flex;gap:8px;margin-top:10px}.history-actions button{padding:8px 11px}.history-empty{padding:18px;border:1px dashed #245262;border-radius:3px;color:var(--muted);text-align:center}.preview-note{text-align:center;font-size:11px;color:#c4ff7a;border:1px dashed #507d35;background:#0b1b13;padding:9px;margin:0 0 14px;letter-spacing:.04em}
+@media(max-width:680px){body{padding:14px 10px}.grid{grid-template-columns:1fr}.card{padding:15px}textarea,.preview{min-height:140px}.connect{align-items:stretch}#room{flex:1;width:auto}.status{flex-basis:100%}}
+
+.copy{background:var(--green);border-color:var(--green);color:#0a1605;width:100%;font-size:13px;margin-top:12px}.send{width:100%}.actions .send{flex-basis:100%}.actions .secondary{background:#0c202b;color:#c4f7ff;border:1px solid #245262}
+
+</style>
+</head>
+<body><main>
+<header><div style="font-size:30px">⚡</div><h1>TextBridge Live</h1><p>Send text from your computer to your phone instantly.</p></header>
+<div class="connect">
+  <div><label for="room">Room code (same on both devices)</label><br><input id="room" value="my-room-123" maxlength="80"></div>
+  <button id="connect">Connect</button>
+  <div class="status"><span class="dot" id="dot"></span><span id="status">Not connected yet</span></div>
+</div>
+<div class="grid">
+<section class="card"><div class="head"><h2>💻 Computer</h2><span class="tag">SEND</span></div>
+<textarea id="sender" placeholder="Paste or type your text here…"></textarea>
+<div class="actions"><button id="send" class="send">Send to phone →</button><button id="clear" class="secondary">Clear</button></div><div class="message" id="sendMsg"></div>
+<p class="hint">Type or paste here, then press Send to phone.</p></section>
+<section class="card"><div class="head"><h2>📱 Phone</h2><span class="tag">COPY</span></div>
+<div id="received" class="preview"><span class="empty">Your PC text will appear here.</span></div>
+<button id="copy" class="copy" disabled>📋 Copy text</button><div class="message" id="copyMsg"></div>
+<p class="hint">Open this same website on your phone, enter the same room code, and connect.</p></section>
+</div>
+<p class="hint" style="text-align:center;margin-top:18px">Use a private room code. Do not send passwords or sensitive information.</p>
+</main>
+<script>
+let ws=null,connected=false,lastText='';
+const $=id=>document.getElementById(id);
+function status(text,ok=false){$('status').textContent=text;$('dot').classList.toggle('ok',ok)}
+function showText(t){lastText=t;$('received').textContent=t;$('copy').disabled=!t.length;$('copyMsg').textContent=''}
+function connect(){
+ const room=$('room').value.trim();
+ if(!room){status('Please enter a room code');return}
+ if(ws){try{ws.close()}catch(e){}}
+ const scheme=location.protocol==='https:'?'wss:':'ws:';
+ ws=new WebSocket(scheme+'//'+location.host);
+ status('Connecting…');
+ ws.onopen=()=>{connected=true;ws.send(JSON.stringify({type:'join',room}));status('Connected — room '+room,true)};
+ ws.onmessage=e=>{try{const m=JSON.parse(e.data);if(m.type==='text'){showText(m.text);$('sendMsg').textContent='Text delivered to connected devices.'}}catch(err){}};
+ ws.onclose=()=>{connected=false;status('Disconnected. Tap Connect to retry.')};
+ ws.onerror=()=>status('Connection error. Check the website server.');
+}
+$('connect').onclick=connect;
+$('send').onclick=()=>{
+ const text=$('sender').value;
+ if(!text.trim()){$('sendMsg').textContent='Paste some text first.';return}
+ if(!ws||ws.readyState!==WebSocket.OPEN){$('sendMsg').textContent='Connect first on this device and the phone.';return}
+ ws.send(JSON.stringify({type:'text',room:$('room').value.trim(),text}));
+ showText(text);$('sendMsg').textContent='Sent to this room.';
+};
+$('clear').onclick=()=>{$('sender').value='';$('sendMsg').textContent=''};
+$('copy').onclick=async()=>{
+ try{await navigator.clipboard.writeText(lastText);$('copyMsg').textContent='Copied! Paste it anywhere.'}
+ catch(e){const t=document.createElement('textarea');t.value=lastText;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');$('copyMsg').textContent='Copied! Paste it anywhere.'}catch(_){$('copyMsg').textContent='Press and hold the text above to copy.'}t.remove()}
+};
+</script></body></html>
